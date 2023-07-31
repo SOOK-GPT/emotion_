@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, {useState} from "react";
-import ChatBot from "./ChatBot";
+import ChatBot from "./ChatBotpage";
 import HomeScreen from "./HomeScreen";
 import FaceRecog from "./FaceRecog";
 import Map from "./Map";
-
+import './css/global.css'
+import NavLink from './component/NavLink';
 
 function App() {
   const [toDos, setToDos] = useState([]);
@@ -15,21 +16,19 @@ function App() {
   return (
     <Router>
       <div>
-        <h1>Emo:U</h1>
-        <hr />
         <nav>
           <ul style={{ display: "flex", listStyle: "none" }}>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/">홈</Link>
+              <NavLink to="/">홈</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/ChatBot">챗봇</Link>
+              <NavLink to="/ChatBot">챗봇</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/Map">지도</Link>
+              <NavLink to="/Map">지도</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/Face-recognition">표정 인식</Link>
+              <NavLink to="/Face-recognition">표정 인식</NavLink>
             </li>
           </ul>
         </nav>
