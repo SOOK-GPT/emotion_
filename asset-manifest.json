@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/SOOK-GPT/emotion_/static/css/main.020411ae.css",
-    "main.js": "/SOOK-GPT/emotion_/static/js/main.da1bb2b4.js",
-    "index.html": "/SOOK-GPT/emotion_/index.html",
-    "main.020411ae.css.map": "/SOOK-GPT/emotion_/static/css/main.020411ae.css.map",
-    "main.da1bb2b4.js.map": "/SOOK-GPT/emotion_/static/js/main.da1bb2b4.js.map"
+    "main.css": "/emotion_/static/css/main.020411ae.css",
+    "main.js": "/emotion_/static/js/main.d9808ed5.js",
+    "index.html": "/emotion_/index.html",
+    "main.020411ae.css.map": "/emotion_/static/css/main.020411ae.css.map",
+    "main.d9808ed5.js.map": "/emotion_/static/js/main.d9808ed5.js.map"
   },
   "entrypoints": [
     "static/css/main.020411ae.css",
-    "static/js/main.da1bb2b4.js"
+    "static/js/main.d9808ed5.js"
   ]
 }
