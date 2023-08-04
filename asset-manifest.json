@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SOOK-GPT/emotion_/static/css/main.020411ae.css",
+    "main.js": "/SOOK-GPT/emotion_/static/js/main.da1bb2b4.js",
+    "index.html": "/SOOK-GPT/emotion_/index.html",
+    "main.020411ae.css.map": "/SOOK-GPT/emotion_/static/css/main.020411ae.css.map",
+    "main.da1bb2b4.js.map": "/SOOK-GPT/emotion_/static/js/main.da1bb2b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.020411ae.css",
+    "static/js/main.da1bb2b4.js"
+  ]
+}
