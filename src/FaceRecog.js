@@ -1,12 +1,7 @@
-//https://arnav25.medium.com/how-to-face-api-in-react-953cfc70d6d
-//https://github.com/justadudewhohacks/face-api.js
-//얼굴인식모델부분은 예지님 파일의 face-api.min.js가 제 컴퓨터에서는 자꾸 에러를 일으키길래 face-api.js 제작자 깃허브랑 다른글 보고 참고해서 임의로
-//적당히 집어넣었습니다. Models파일(public에 있어요)들이 좀 다른것 같고 저는 face-api.min.js를 사용하지 않습니다. 왜 돌아가는지는 저도 위에 블로그 따라한거라 잘 모르겠어요ㅎㅎ
-//그래도 코드가 비슷한 부분은 꽤 있으니까 보시면서 예지님이 작성하신 코드 방향대로 수정해주시면 될 것 같아요!!
-//그 이외에도 reactjs 문법에 맞춰서 조금 수정했고, 음성파일이나 url연결, 화면 디자인 같은 부분들은 예지님이 신경써주시면 될 것 같습니다!
-
 import React, { useState } from 'react';
 import * as faceapi from 'face-api.js';
+import "./css/homescreen.css";
+import "./css/facerecog.css";
 
 //얼굴인식
 function FaceRecog() {
@@ -32,6 +27,9 @@ function FaceRecog() {
         loadModels();
     }, []);
 
+
+
+    
     //웹캠 열기
     const startVideo = () => {
         setCaptureVideo(true);
@@ -87,27 +85,38 @@ function FaceRecog() {
     //기쁠때 버튼 눌렀을때
     const toggleList = () => {
         setShowList(!showList);
+        setShowSurprised(false);
+        setShowAngry(false);
+        setShowSad(false);
     };
 
     //놀랐을때 버튼 눌렀을때
     const toggleSurprised = () => {
+        setShowList(false);
         setShowSurprised(!showSurprised);
+        setShowAngry(false);
+        setShowSad(false);
     };
 
     //화났을때
     const toggleAngry = () => {
+        setShowList(false);
+        setShowSurprised(false);
         setShowAngry(!showAngry);
+        setShowSad(false);
     };
 
     //슬플때
     const toggleSad = () => {
+        setShowList(false);
+        setShowSurprised(false);
+        setShowAngry(false);
         setShowSad(!showSad);
     };
 
     
     return (
     <div>
-        <p>표정 인식 서비스</p>
 
         <div style={{ textAlign: 'center', padding: '10px' }}>
         {
@@ -136,12 +145,14 @@ function FaceRecog() {
             <>
             </>
         }
-    
-
 
         <div class="emotions">
-                <p>play1_2(), play1_4()가 뭔가요?? 에러나길래 일단 지웠습니당</p>
+            <div class="bbuutt">
                 <button id="btn1_1" onClick={toggleList}>기쁠 때 누르기</button> 
+                <button id="btn_surprised" onClick={toggleSurprised}>놀랐을 때 누르기</button>
+                <button id="btn_angry" onClick={toggleAngry}>화났을 때 누르기</button>
+                <button id="btn_sad" onClick={toggleSad}>슬플 때 누르기</button>
+            </div>
                     {showList && (
                         <div className="happyBtns" id="hBtns">
                         <ul>
@@ -185,7 +196,7 @@ function FaceRecog() {
                         </div>
                     )}
 
-                <button id="btn_surprised" onClick={toggleSurprised}>놀랐을 때 버튼</button>
+                
                     {showSurprised && (
                         <div className="surprisedBtns" id="sBtns">
                         <ul>
@@ -213,7 +224,7 @@ function FaceRecog() {
                         </div>
                     )}
 
-                    <button id="btn_angry" onClick={toggleAngry}>화났을 때 버튼</button>
+                    
                     {showAngry && (
                         <div className="angryBtns" id="aBtns">
                         <ul>
@@ -236,7 +247,7 @@ function FaceRecog() {
                         </div>
                     )}
 
-                    <button id="btn_sad" onClick={toggleSad}>슬플 때 버튼</button>
+                    
                     {showSad && (
                         <div className="sadBtns" id="uBtns">
                         <ul>
@@ -263,11 +274,9 @@ function FaceRecog() {
                         </ul>
                         </div>
                     )}
-                    </div>
-
+                </div>
             </div>
     );
-
 }
 
 export default FaceRecog;

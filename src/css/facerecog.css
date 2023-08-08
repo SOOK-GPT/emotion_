@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+​
+body {
+    font-family: 'ABeeZee', sans-serif;
+    background-color: #fafafa;
+    }
+    ​
+    a {
+        font-family: 'ABeeZee', sans-serif;
+        text-decoration: none;
+    }
+    ​
+    body {
+        margin: 100;
+        padding: 0;
+        /* width: 100vw;
+        height: 100vh; */
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    ​
+    footer{
+        /* position: 400 600; */
+        position: absolute;
+        top: 500px;
+    } 
+    .buttons{
+        margin-top: 10px;
+    }
+    ​
+    canvas {
+        position: absolute;
+    }
+    ​
+    #hori1{
+        display: flex;
+    }
+    ​
+    ​
+    .happyBtns, .sadBtns, .surprisedBtns, .angryBtns{
+        background: rgba(255, 255, 255, 0.8);
+    }
+    ​
+    .emotions li a{
+        text-decoration-line: none;
+        color: #000900;
+    }
+    ​
+    .emotions li a:hover {
+        background-color: pink;
+        color: #fff;
+        text-decoration-line: none;
+    }
+    ​
+    #btn1_1{
+        font-family: 'ABeeZee', sans-serif;
+        width: 220px;
+        height: 42px;
+        margin: 36px 0 39px 130px;
+        background-color: #fffbd1;
+        font-size: 20px;
+        border-radius: 0.25rem;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: #000;
+    }
+    ​
+    #btn_surprised{
+        width: 220px;
+        height: 42px;
+        margin: 36px 0 39px;
+        background-color: #e0ffe6;
+        font-size: 20px;
+        border-radius: 0.25rem;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: #000;
+    }
+    ​
+    #btn_angry{
+        width: 220px;
+        height: 42px;
+        margin: 36px 0 39px 1px;
+        background-color: #ffe6e0;
+        font-size: 20px;
+        border-radius: 0.25rem;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: #000;
+    }
+    ​
+    #btn_sad{
+        width: 220px;
+        height: 42px;
+        background-color: #cee3f5;
+        font-size: 20px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: #000;
+}

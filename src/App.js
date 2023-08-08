@@ -4,6 +4,9 @@ import ChatBot from "./ChatBotpage";
 import HomeScreen from "./HomeScreen";
 import FaceRecog from "./FaceRecog";
 import Kakao from "./Kakaomap";
+import Map from "./Map";
+import './css/global.css'
+import NavLink from './component/NavLink';
 
 
 function App() {
@@ -20,16 +23,16 @@ function App() {
         <nav>
           <ul style={{ display: "flex", listStyle: "none" }}>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/">홈</Link>
+              <NavLink to="/">홈</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/ChatBot">챗봇</Link>
+              <NavLink to="/ChatBot">챗봇</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/Map">지도</Link>
+              <NavLink to="/Map">지도</NavLink>
             </li>
             <li style={{ margin: "0 10px" }}>
-              <Link to="/Face-recognition">표정 인식</Link>
+              <NavLink to="/Face-recognition">표정 인식</NavLink>
             </li>
           </ul>
         </nav>
@@ -42,7 +45,7 @@ function App() {
             <ChatBot addToDo={addToDo}/>
           </Route>
           <Route path="/Map">
-            <Kakao addToDo={addToDo}/>
+            <Map addToDo={addToDo}/>
           </Route>
           <Route path="/Face-recognition">
             <FaceRecog addToDo={addToDo}/>

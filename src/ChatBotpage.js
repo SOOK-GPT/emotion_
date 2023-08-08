@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
-import ChatBot from 'react-simple-chatbot';
-import {ThemeProvider} from 'styled-components';
+//import ChatBot from 'react-simple-chatbot';
+//import {ThemeProvider} from 'styled-components';
 import { Configuration, OpenAIApi } from "openai"; // Import the required OpenAI classes
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from "@chatscope/chat-ui-kit-react";
+//import styled from "styled-components";
 import styled from "styled-components";
-/*
-{
-            id: '6',
-            message: ({ previousValue }) => {
-                //console.log(previousValue);
-                const value = apiCall(previousValue);
-                return `${previousValue}가 궁금하신거군요. 잠시만 기다리세요...${value}`;
-            },
-            trigger: '7',
-        },
-        */
+import pagination from "./pagination.css";
+import './css/global.css'
 
-const API_KEY = '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';
+
+const API_KEY = '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';
 
 const openAIConfig = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
 });
 
 const openai = new OpenAIApi(openAIConfig);
@@ -33,59 +26,7 @@ async function apiCall(userInput) {
     console.log(chatCompletion.data.choices[0].message.content);
     return chatCompletion.data.choices[0].message.content;
 }
-/*
-const theme = {
-    background: '#f5f8fb',
-    fontFamily: 'Helvetica Neue',
-    headerBgColor: '#EF6C00',
-    headerFontColor: '#fff',
-    headerFontSize: '15px',
-    botBubbleColor: '#EF6C00',
-    botFontColor: '#fff',
-    userBubbleColor: '#fff',
-    userFontColor: '#4a4a4a',
-    
-};
-    
-const steps = [
-    {
-        id: '1',
-        message: '안녕하세요? 무엇을 도와드릴까요?',
-        trigger: '2',
-        },
-        {
-            id: '2',
-            options: [
-                { value: 1, label: 'EmoU 전화 상담 연결', trigger: '3' },
-                { value: 2, label: '가까운 복지관 대표 전화', trigger: '4' },
-                { value: 3, label: '서비스 이용 문의', trigger: '5' },
-                { value: 3, label: '연결이 안될 때', trigger: '6' },
-            ],
-        },
-        {
-            id: '3',
-            message: '전화상담을 선택하셨습니다. 잠시만 기다리세요.',
-            trigger: '1'
-        },
-        {
-            id: '4',
-            message: '가까운 복지관 대표 전화를 알려드리겠습니다.',
-            trigger: '1'
-        },
-        {
-            id: '5',
-            message: '어떤 서비스를 이용하려고 하세요?',
-            trigger: '1',
-        },
-        {
-            id: '6',
-            message: '연결이 안될때...',
-            trigger: '1',
-        },
-        
-];
 
-*/
 
 function ChatBotpage() {
     //simple react chatbot 
@@ -169,6 +110,8 @@ function ChatBotpage() {
         //await processingMessageToChatGPT(newMessages);
     }
 
+    
+
     async function processingMessageToChatGPT(chatMessages){
         let apiMessages = chatMessages.map((messageObject) => {
             let role = "";
@@ -227,6 +170,7 @@ function ChatBotpage() {
     const [isAdditionalButtonsVisible2, setAdditionalButtonsVisible2] = useState(false);
     const [isAdditionalButtonsVisible3, setAdditionalButtonsVisible3] = useState(false);
     const [isAdditionalButtonsVisible4, setAdditionalButtonsVisible4] = useState(false);
+    const [isAdditionalButtonsVisible5, setAdditionalButtonsVisible5] = useState(false);
     const [isSubButtonsVisible, setSubButtonsVisible] = useState(false);
 
     const handleButtonClick = (text) => {
@@ -234,6 +178,7 @@ function ChatBotpage() {
         //doNext(text);
         if(text === '복지서비스'){
             //console.log(messages);
+            
             setIsVisible(false);
             setAdditionalButtonsVisible(true); //버튼 안보이게 하기
             handleSendNotSendGPT2(`<strong>${text}</strong>를 선택하셨습니다.\n\n 복지서비스는 나와 우리 가족의 생애주기, 가구상황과 관심주제 등을 입력하여 다양한 복지 혜택을 찾을 수 있습니다.\n\n 아래에서 원하시는 내용을 선택해 주세요.`);
@@ -246,10 +191,17 @@ function ChatBotpage() {
             `도움이 필요한 분이나 그 이웃 누구나 요청할 수 있으며, 도움요청 정보는 보건복지상담센터나 주민센터 복지담당자에게 전달되어 처리됩니다.\n\n`+
             `※보건복지상담센터(129), 정신건강상담전화(1577-0199), 자살예방상담센터(1393), 생명의 전화(1588-9191), 청소년전화(1388)\n`
             );
-        }else if(text === '자주묻는 질문'){
+        }else if(text === '서비스 이용 문의'){
             setIsVisible(false);
-            setAdditionalButtonsVisible4(true); //버튼 안보이게 하기
-            handleSendNotSendGPT2(`<strong>${text}</strong>을 선택하셨습니다.\n\n`);
+            setAdditionalButtonsVisible5(true);
+            handleSendNotSendGPT2('어떤 서비스를 이용하려고 하세요?');
+        }else if(text === '대화가 필요할 때'){
+            setIsVisible(false);
+            handleSendNotSendGPT2('안녕하세요! 어떤 대화가 필요하신가요?\n\n "챗봇에게 메세지 보내기"란을 통해 대화를 시작해 보세요.');
+        }else if(text === '홈'){
+            setIsVisible(true);
+            setAdditionalButtonsVisible(false); // Hide all additional buttons
+            setSubButtonsVisible(false);
         }else{
             alert(text);
             setIsVisible(false);
@@ -257,14 +209,16 @@ function ChatBotpage() {
             handleSendNotSendGPT(text);
         }
         
+        //handleSendNotSendGPT(text); 왜 안될까??
     };
 
     const handleAdditionalButtonClick = (text) => {
         setAdditionalButtonsVisible(false); // 중장년 교육과 중장년 정보 버튼 안보이게 하기
         setSubButtonsVisible(true); // 하위 버튼 보이게 하기
-        if (text === '홈'){
+        if (text === '처음으로'){
             handleSendNotSendGPT(text);
             setIsVisible(true);
+            //setAdditionalButtonsVisible5(true);
         }else if(text === '주거급여'){
             setIsVisible(false);
             setAdditionalButtonsVisible4(true); //버튼 안보이게 하기
@@ -479,49 +433,241 @@ function ChatBotpage() {
         //handleSend(text); //gpt 응답 사용
     };
 
+    const handleButtonClick2 = (text) => {
+        //handleSendNotSendGPT(text);
+        //doNext(text);
+        setAdditionalButtonsVisible5(false);
+        if(text === '챗봇'){
+            setIsVisible(false);
+            //setAdditionalButtonsVisible5(true);
+            handleSendNotSendGPT2(`<strong>챗봇 서비스</strong>에 대해서 이용 안내드릴게요.\n\n 다양한 사회복지 제도와 지원대상, 신청방법을 안내합니다.\n그리고 간단한 대화를 통해 외로움을 해소할 수 있습니다.`
+            );
+        }else if(text === '지도'){
+            setIsVisible(false);
+            //setAdditionalButtonsVisible5(true);
+            handleSendNotSendGPT2(`<strong>지도 서비스</strong>에 대해서 이용 안내드릴게요.\n\n 전국에 있는 사회복지센터의 위치를 손쉽게 알 수 있습니다. 현재 위치에 기반하여 근처에 있는 사회복지기관과 전국적으로 분포하는 사회복지기관을 다양하게 볼 수 있습니다.`
+            );
+        }else if(text === '얼굴 인식'){
+            setIsVisible(false);
+            //setAdditionalButtonsVisible5(true);
+            handleSendNotSendGPT2(`<strong>얼굴 인식 서비스</strong>에 대해서 이용 안내드릴게요.\n\n 카메라를 통해 현재 느끼는 감정상태를 파악할 수 있습니다.\n현재 느끼는 감정에 따라 적절한 해결방안도 적용할 수 있습니다.`
+            );
+            //moretalk('안녕');
+        }else{
+            alert(text);
+            setIsVisible(false);
+            //setAdditionalButtonsVisible(true); //버튼 안보이게 하기
+            handleSendNotSendGPT(text);
+        }
+        
+    };
+    const [isHovered, setIsHovered] = useState(false);
+
+    let custombutton = {
+        padding: "5px 10px",
+        fontSize: "14px", 
+        fontWeight: "bold",
+        width: "135px",
+        height: "40px",
+        alignSelf: "center",
+        marginLeft: "10px",
+        marginTop: "15px",
+        background: isHovered ? "gray" : "white",
+        border: isHovered ? "2px solid gray" : "1px solid #b7b7b7",
+        color: isHovered ? "white" : "black",
+        borderRadius: "10px",
+        cursor: "pointer",
+        transition: "background-color 0.3s ease, border 0.3s ease, color 0.3s ease",
+    }
+
+    const buttonhover = {
+        ...custombutton, // 기존 custombutton 스타일을 모두 포함
+        background: "#b7b7b7",
+        border: "1px solid #b7b7b7",
+        color: "white",
+    };
+
+
+    const [hoveredButton, setHoveredButton] = useState(null);
+
+    const handleButtonHover = (buttonName) => {
+        setHoveredButton(buttonName);
+    };
+
+    const backcolor = {
+        background: "gray"
+    }
+
+    const ButtonGroup = ({ children }) => (
+        <div style={{ marginBottom: '15px' }}>
+            {children}
+        </div>
+    );
+    
+
     return (
         
     <div>
-        <p>chat gpt 모델 기반 챗봇 페이지</p>
 
-        <div style={{position: "relative", height: '500px', width: "800px"}}>
+
+        <div className={pagination.body} style={{position: "relative", height: '500px', width: "800px"}}>
             <MainContainer>
                 <ChatContainer>
                     <MessageList 
                         scrollBehavior="smooth"
                         typingIndicator = {typing ? <TypingIndicator content="입력중입니다..." /> : null}
                     >
+
+                        
                         
                         {messages.map((message, i) => {
+                            console.log(i, message);
                             return <Message key= {i} model = {message} />
                         })}
 
                         
                         
-                        {isVisible && (
-                            <>
-                                <button onClick={() => handleButtonClick('복지서비스')}>복지서비스</button>
-                                <button onClick={() => handleButtonClick('복지도움')}>복지도움</button>
-                                <button onClick={() => handleButtonClick('자주묻는 질문')}>자주묻는 질문</button>
-                            </>
-                        )}
-
+{isVisible && (
+    <>
+        <button
+            style={hoveredButton === '복지서비스' ? buttonhover : custombutton}
+            onClick={() => handleButtonClick('복지서비스')}
+            onMouseEnter={() => handleButtonHover('복지서비스')}
+            onMouseLeave={() => handleButtonHover(null)}
+        >
+            복지서비스
+        </button>
+        <button
+            style={hoveredButton === '복지도움' ? buttonhover : custombutton}
+            onClick={() => handleButtonClick('복지도움')}
+            onMouseEnter={() => handleButtonHover('복지도움')}
+            onMouseLeave={() => handleButtonHover(null)}
+        >
+            복지도움
+        </button>
+        <button
+            style={hoveredButton === '서비스 이용 문의' ? buttonhover : custombutton}
+            onClick={() => handleButtonClick('서비스 이용 문의')}
+            onMouseEnter={() => handleButtonHover('서비스 이용 문의')}
+            onMouseLeave={() => handleButtonHover(null)}
+        >
+            서비스 이용 문의
+        </button>
+        <button
+            style={hoveredButton === '대화가 필요할 때' ? buttonhover : custombutton}
+            onClick={() => handleButtonClick('대화가 필요할 때')}
+            onMouseEnter={() => handleButtonHover('대화가 필요할 때')}
+            onMouseLeave={() => handleButtonHover(null)}
+        >
+            대화가 필요할 때
+        </button>
+    </>
+)}
                         {isAdditionalButtonsVisible && (
                                 <>
-                                <button onClick={() => handleAdditionalButtonClick('주거급여')}>주거급여</button>
-                                <button onClick={() => handleAdditionalButtonClick('기초연금')}>기초연금</button>
-                                <button onClick={() => handleAdditionalButtonClick('생계급여')}>생계급여</button>
-                                <button onClick={() => handleAdditionalButtonClick('가정양육수당')}>가정양육수당</button>
-                                <button onClick={() => handleAdditionalButtonClick('아동수당')}>아동수당</button>
-                                <button onClick={() => handleAdditionalButtonClick('의료급여')}>의료급여</button>
-                                <button onClick={() => handleAdditionalButtonClick('교육급여')}>교육급여</button>
-                                <button onClick={() => handleAdditionalButtonClick('유아학비')}>유아학비</button>
-                                <button onClick={() => handleAdditionalButtonClick('이동통신요금감면')}>이동통신요금감면</button>
-                                <button onClick={() => handleAdditionalButtonClick('청년희망키움통장')}>청년희망키움통장</button>
-                                <button onClick={() => handleAdditionalButtonClick('장애수당')}>장애수당</button>
+                                <ButtonGroup>
+                                    <button
+                                        style={hoveredButton === '주거급여' ? buttonhover : custombutton}
+                                        onClick={() => handleAdditionalButtonClick('주거급여')}
+                                        onMouseEnter={() => handleButtonHover('주거급여')}
+                                        onMouseLeave={() => handleButtonHover(null)}
+                                    >주거급여</button>
+                                                            <button
+                                        style={hoveredButton === '기초연금' ? buttonhover : custombutton}
+                                        onClick={() => handleAdditionalButtonClick('기초연금')}
+                                        onMouseEnter={() => handleButtonHover('기초연금')}
+                                        onMouseLeave={() => handleButtonHover(null)}
+                                    >기초연금</button>
+                                                            <button
+                                        style={hoveredButton === '생계급여' ? buttonhover : custombutton}
+                                        onClick={() => handleAdditionalButtonClick('생계급여')}
+                                        onMouseEnter={() => handleButtonHover('생계급여')}
+                                        onMouseLeave={() => handleButtonHover(null)}
+                                    >생계급여</button>
+                                                            <button
+                                        style={hoveredButton === '가정양육수당' ? buttonhover : custombutton}
+                                        onClick={() => handleAdditionalButtonClick('가정양육수당')}
+                                        onMouseEnter={() => handleButtonHover('가정양육수당')}
+                                        onMouseLeave={() => handleButtonHover(null)}
+                                    >가정양육수당</button>
+                                </ButtonGroup>
+
+                                <ButtonGroup>
+                                                        <button
+                                    style={hoveredButton === '아동수당' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('아동수당')}
+                                    onMouseEnter={() => handleButtonHover('아동수당')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >아동수당</button>
+                                                        <button
+                                    style={hoveredButton === '의료급여' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('의료급여')}
+                                    onMouseEnter={() => handleButtonHover('의료급여')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >의료급여</button>
+                                                        <button
+                                    style={hoveredButton === '교육급여' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('교육급여')}
+                                    onMouseEnter={() => handleButtonHover('교육급여')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >교육급여</button>
+                                                        <button
+                                    style={hoveredButton === '유아학비' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('유아학비')}
+                                    onMouseEnter={() => handleButtonHover('유아학비')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >유아학비</button>
+
+                                </ButtonGroup>
+
+                                <ButtonGroup>
+                                                        <button
+                                    style={hoveredButton === '이동통신요금감면' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('이동통신요금감면')}
+                                    onMouseEnter={() => handleButtonHover('이동통신요금감면')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >이동통신요금감면</button>
+                                                        <button
+                                    style={hoveredButton === '청년희망키움통장' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('청년희망키움통장')}
+                                    onMouseEnter={() => handleButtonHover('청년희망키움통장')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >청년희망키움통장</button>
+                                                        <button
+                                    style={hoveredButton === '장애수당' ? buttonhover : custombutton}
+                                    onClick={() => handleAdditionalButtonClick('장애수당')}
+                                    onMouseEnter={() => handleButtonHover('장애수당')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >장애수당</button>
+                                </ButtonGroup>
                                 </>
                         )}
-                        <button onClick={() => handleAdditionalButtonClick('홈')}>홈</button>
+
+                        {isAdditionalButtonsVisible5 && (
+                                                    <>
+                                                        <button
+                                    style={hoveredButton === '챗봇' ? buttonhover : custombutton}
+                                    onClick={() => handleButtonClick2('챗봇')}
+                                    onMouseEnter={() => handleButtonHover('챗봇')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >챗봇</button>
+                                                        <button
+                                    style={hoveredButton === '지도' ? buttonhover : custombutton}
+                                    onClick={() => handleButtonClick2('지도')}
+                                    onMouseEnter={() => handleButtonHover('지도')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >지도</button>
+                                                        <button
+                                    style={hoveredButton === '얼굴 인식' ? buttonhover : custombutton}
+                                    onClick={() => handleButtonClick2('얼굴 인식')}
+                                    onMouseEnter={() => handleButtonHover('얼굴 인식')}
+                                    onMouseLeave={() => handleButtonHover(null)}
+                                >얼굴 인식</button>
+                                                    </>
+                                                )}
+
+                        <button style = {{...custombutton, background:"#b7b7b7", color:"white"}} onClick={() => handleAdditionalButtonClick('처음으로')}>처음으로</button>
+                    
                         
                     </MessageList>
                     <MessageInput placeholder="챗봇에게 메시지 보내기" onSend={handleSend} />
